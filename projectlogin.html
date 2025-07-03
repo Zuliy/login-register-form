@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login2.css" />
+</head>
+<body>
+
+ 
+
+  <header>
+    <h1>Login Page</h1>
+    <nav class="navigation">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+      <button class="btnlogin">Login</button>
+    </nav>
+  </header>
+
+  
+
+  <div class="wrapper">
+    <div class="form-box login">
+      <h2>LOGIN</h2>
+      <form action="#" id="loginForm">
+
+       
+        <div class="input-box">
+          <input type="email" id="loginEmail" />
+          <label for="loginEmail">Email</label>
+        </div>
+
+       
+        <div class="input-box">
+          <input type="password" id="loginPass" required />
+          <label for="loginPass">Password</label>
+        </div>
+
+        
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> Remember Me</label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+       
+        <button type="submit" class="btn">Login</button>
+
+        
+        <div class="login-register">
+          <p>Don't Have an Account?
+            <a href="#" class="register-link">Register</a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+<script>
+  const wrapper = document.querySelector('.wrapper');
+  const registerLink = document.querySelector('.register-link');
+
+  registerLink.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Hide login box
+    const loginBox = document.querySelector('.form-box.login');
+    loginBox.style.display = 'none';
+
+    // Create register form box
+    const registerBox = document.createElement('div');
+    registerBox.classList.add('form-box', 'register');
+    registerBox.innerHTML = `
+      <h2>REGISTER</h2>
+      <form id="registerForm">
+        <div class="input-box">
+          <input type="text" id="fullName" required />
+          <label>Full Name</label>
+        </div>
+        <div class="input-box">
+          <input type="number" id="phonenum" required />
+          <label>phone-number</label>
+        </div>
+        <div class="input-box">
+          <input type="email" id="email" required />
+          <label>Email</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="password" required />
+          <label>Password</label>
+        </div>
+        <button type="button" class="btn" id="registerBtn">Register</button>
+        <div class="login-register">
+          <p>Already have an account?
+            <a href="#" id="backToLogin">Login</a>
+          </p>
+        </div>
+      </form>
+    `;
+
+    wrapper.appendChild(registerBox);
+
+    // Back to login
+    document.getElementById('backToLogin').addEventListener('click', function (e) {
+      e.preventDefault();
+      registerBox.remove();
+      loginBox.style.display = 'block';
+    });
+
+    // Register button validation
+    document.getElementById('registerBtn').addEventListener('click', function () {
+      const fullName = document.getElementById('fullName').value.trim();
+      const phonenum = document.getElementById('phonenum').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      
+      if (!fullName || !phonenum || !email || !pass ) {
+        alert("Please fill all fields first!");
+      } 
+      else {
+        alert("Registered successfully!");
+        document.getElementById("registerForm").reset();
+      }
+    });
+  });
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+
+      if (!email || !pass) {
+        alert("Please enter both email and password!");
+      } else {
+        alert("Login successful!");
+        this.reset();
+      }
+    });
+</script>
+
+</body>
+</html>
